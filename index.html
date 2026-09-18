@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Holiday Nut Craving</title>
+  <meta name="description" content="Roasted-to-order nuts, local kettle popcorn, and fall gifts. The 2023 shop, relaunched for harvest season." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f4ede3;
+      --surface: #fbf7f1;
+      --fg: #2a1c14;
+      --muted: #6f5b4e;
+      --primary: #700C0E;
+      --primary-fg: #fbf7f1;
+      --forest: #3d5a45;
+      --forest-fg: #f4ede3;
+      --border: #e4d6c5;
+      --linen: #ebe1d2;
+      --ink: #1c120c;
+      --shadow: 0 0 0 1px rgba(42,28,20,.06), 0 1px 2px -1px rgba(42,28,20,.06), 0 2px 4px rgba(42,28,20,.04);
+      --font-display: "Fraunces", "Times New Roman", serif;
+      --font-sans: "Source Sans 3", "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-sans);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+    button { font-family: inherit; cursor: pointer; }
+    h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.02em; line-height: 1.15; text-wrap: balance; }
+    .wrap { width: min(1120px, calc(100% - 32px)); margin-inline: auto; }
+
+    .promo { background: var(--primary); color: var(--primary-fg); text-align: center; padding: 8px 16px; font-size: 13px; font-weight: 500; }
+    .promo span { opacity: .65; margin: 0 10px; }
+
+    header.site {
+      position: sticky; top: 0; z-index: 40;
+      background: color-mix(in oklab, var(--bg) 92%, transparent);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar { display: flex; align-items: center; gap: 16px; padding: 12px 0; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .mark {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: #f4ede3;
+      box-shadow: inset 0 0 0 2.5px var(--primary);
+      display: grid; place-items: center; flex-shrink: 0;
+      overflow: hidden;
+    }
+    .mark svg { display: block; width: 62px; height: 62px; }
+    .logo strong { display: block; font-family: var(--font-display); font-size: 15px; }
+    .logo em { display: block; font-style: normal; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-top: 2px; font-weight: 600; }
+    .search { flex: 1; position: relative; min-width: 0; }
+    .search input {
+      width: 100%; height: 44px; border: 0; border-radius: 8px;
+      background: var(--surface); box-shadow: var(--shadow);
+      padding: 0 14px 0 40px; font-size: 15px; color: var(--fg);
+    }
+    .search svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--muted); }
+    .icon-btn {
+      width: 44px; height: 44px; border: 0; border-radius: 8px;
+      background: transparent; color: var(--fg); position: relative;
+    }
+    .badge-count {
+      position: absolute; top: 6px; right: 6px; min-width: 16px; height: 16px;
+      padding: 0 4px; border-radius: 99px; background: var(--primary); color: var(--primary-fg);
+      font-size: 10px; font-weight: 700; display: grid; place-items: center;
+    }
+    nav.depts { border-top: 1px solid var(--border); }
+    nav.depts ul { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; align-items: center; }
+    nav.depts a {
+      display: inline-flex; height: 44px; align-items: center; padding: 0 12px;
+      text-decoration: none; font-size: 14px; font-weight: 600; color: color-mix(in oklab, var(--fg) 90%, transparent);
+    }
+    nav.depts a:hover, nav.depts a.on { color: var(--primary); }
+    nav.depts .story { margin-left: auto; color: var(--muted); font-weight: 500; }
+    .menu-btn { display: none; }
+
+    .hero { position: relative; min-height: 28rem; height: min(72vh, 680px); overflow: hidden; }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to top, rgba(28,18,12,.85), rgba(28,18,12,.4) 45%, rgba(28,18,12,.18)),
+        radial-gradient(circle at 30% 40%, #6b3a22 0%, #3d2414 55%, #1c120c 100%);
+    }
+    .hero-inner { position: absolute; inset-inline: 0; bottom: 0; padding: 64px 0 40px; }
+    .kicker { font-size: 11px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: color-mix(in oklab, var(--primary-fg) 80%, transparent); }
+    .hero h1 { margin: 8px 0 0; max-width: 22ch; font-size: clamp(1.8rem, 4vw, 3.6rem); color: var(--primary-fg); }
+    .hero p { margin: 12px 0 0; max-width: 42ch; color: color-mix(in oklab, var(--primary-fg) 85%, transparent); }
+    .row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      height: 48px; padding: 0 22px; border: 0; border-radius: 8px;
+      background: var(--primary); color: var(--primary-fg); font-weight: 600; text-decoration: none; font-size: 15px;
+    }
+    .btn:hover { filter: brightness(1.05); }
+    .btn.ghost { background: var(--surface); color: var(--fg); }
+    .btn.forest { background: var(--forest); color: var(--forest-fg); }
+    .btn.sm { height: 36px; padding: 0 14px; font-size: 13px; }
+    .btn.full { width: 100%; }
+
+    .promises { background: var(--surface); border-bottom: 1px solid var(--border); }
+    .promises .wrap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 22px 0; }
+    .promise { display: flex; gap: 12px; }
+    .promise b { display: block; }
+    .promise span { color: var(--muted); font-size: 14px; }
+
+    section.block { padding: 48px 0; }
+    .sec-head { margin-bottom: 22px; }
+    .sec-head .kicker { color: var(--muted); }
+    .sec-head h2 { margin: 4px 0 0; font-size: 1.85rem; }
+
+    .depts-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+    .dept-tile {
+      position: relative; overflow: hidden; border-radius: 12px; min-height: 220px;
+      text-decoration: none; color: var(--primary-fg);
+      background: #4a2a18;
+    }
+    .dept-tile span {
+      position: absolute; left: 12px; bottom: 12px;
+      font-family: var(--font-display); font-size: 1.15rem; font-weight: 600;
+    }
+    .dept-tile:nth-child(1) { background: linear-gradient(#8a5a32, #3d2414); }
+    .dept-tile:nth-child(2) { background: linear-gradient(#c47a2c, #5a2e12); }
+    .dept-tile:nth-child(3) { background: linear-gradient(#700C0E, #2a0506); }
+    .dept-tile:nth-child(4) { background: linear-gradient(#3a2418, #1c120c); }
+    .dept-tile:nth-child(5) { background: linear-gradient(#700C0E, #2a0506); }
+
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px 14px; }
+    .thumb {
+      aspect-ratio: 1; border-radius: 12px; background: var(--linen);
+      display: grid; place-items: center; overflow: hidden; position: relative;
+      text-decoration: none;
+    }
+    .thumb .art { width: 72%; height: 72%; border-radius: 50%; }
+    .pills { position: absolute; top: 10px; left: 10px; display: flex; gap: 6px; flex-wrap: wrap; }
+    .pill {
+      font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+      padding: 3px 8px; border-radius: 99px;
+    }
+    .pill.best { background: color-mix(in oklab, var(--primary) 14%, white); color: var(--primary); }
+    .pill.local { background: color-mix(in oklab, var(--forest) 14%, white); color: var(--forest); }
+    .pill.new { background: var(--primary); color: var(--primary-fg); }
+    .pill.harvest { background: color-mix(in oklab, var(--primary) 14%, white); color: var(--primary); }
+    .meta { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 10px 0 0; }
+    .card h3 { margin: 4px 0 0; font-size: 1.1rem; }
+    .card h3 a { text-decoration: none; }
+    .card h3 a:hover { color: var(--primary); }
+    .tagline { margin: 4px 0 0; font-size: 14px; color: var(--muted); }
+    .stars { margin-top: 8px; font-size: 13px; color: var(--muted); }
+    .stars b { color: var(--primary); letter-spacing: 1px; }
+    .buy { margin-top: auto; padding-top: 12px; display: flex; justify-content: space-between; align-items: end; gap: 10px; }
+    .price { font-size: 14px; }
+    .price strong { font-size: 15px; }
+
+    .band { background: var(--forest); color: var(--forest-fg); }
+    .band .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 36px; align-items: center; padding: 56px 0; }
+    .band-art {
+      min-height: 280px; border-radius: 12px;
+      background: linear-gradient(135deg, #c47a2c, #5a2e12 60%, #2a1810);
+    }
+    .band .kicker { color: color-mix(in oklab, var(--forest-fg) 80%, transparent); }
+    .band h2 { font-size: 2.2rem; margin: 8px 0 0; }
+    .band p { color: color-mix(in oklab, var(--forest-fg) 85%, transparent); }
+
+    .gifts { background: var(--surface); border-block: 1px solid var(--border); }
+    .gifts .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; padding: 48px 0; }
+    .gift-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .gift-grid a { text-decoration: none; }
+    .gift-grid .art { aspect-ratio: 1; border-radius: 12px; background: var(--linen); }
+    .gift-grid p { margin: 8px 0 0; font-size: 14px; font-weight: 600; }
+
+    footer.site { background: var(--surface); border-top: 1px solid var(--border); margin-top: auto; }
+    footer.site .wrap { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.3fr; gap: 36px; padding: 48px 0; }
+    footer.site h4 { margin: 0 0 12px; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); font-family: var(--font-sans); }
+    footer.site ul { list-style: none; margin: 0; padding: 0; }
+    footer.site li { margin: 8px 0; }
+    footer.site a { text-decoration: none; font-size: 14px; }
+    footer.site a:hover { color: var(--primary); }
+    footer.site p { color: var(--muted); font-size: 14px; max-width: 28ch; }
+    .news { display: flex; gap: 8px; margin-top: 12px; }
+    .news input {
+      flex: 1; height: 44px; border: 0; border-radius: 8px; padding: 0 12px;
+      background: var(--bg); box-shadow: var(--shadow); color: var(--fg);
+    }
+    .legal { border-top: 1px solid var(--border); font-size: 12px; color: var(--muted); }
+    .legal .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 16px 0; }
+
+    .page { padding: 36px 0 64px; display: none; }
+    .page.on { display: block; }
+    .crumb { font-size: 14px; color: var(--muted); margin-bottom: 18px; }
+    .crumb a { color: var(--muted); text-decoration: none; }
+    .crumb a:hover { color: var(--fg); }
+    .shop-layout { display: grid; grid-template-columns: 220px 1fr; gap: 32px; }
+    .filters h1 { font-size: 2.2rem; margin: 0; }
+    .filters p { color: var(--muted); font-size: 14px; }
+    .count { font-size: 12px; color: var(--muted); }
+    .filter-label { font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin: 22px 0 8px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+    .chip {
+      height: 36px; padding: 0 12px; border: 0; border-radius: 99px;
+      background: var(--linen); color: var(--fg); font-size: 13px; text-transform: capitalize;
+    }
+    .chip.on { background: var(--primary); color: var(--primary-fg); }
+    .toolbar { display: flex; justify-content: flex-end; gap: 8px; align-items: center; margin-bottom: 20px; }
+    .toolbar select {
+      height: 44px; border: 0; border-radius: 8px; background: var(--surface);
+      box-shadow: var(--shadow); padding: 0 12px; color: var(--fg);
+    }
+
+    .pdp { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    .pdp-art { aspect-ratio: 1; border-radius: 12px; background: var(--linen); display: grid; place-items: center; }
+    .pdp-art .art { width: 62%; height: 62%; border-radius: 50%; }
+    .sizes { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 18px; }
+    .size {
+      min-width: 92px; text-align: left; border: 0; border-radius: 8px;
+      background: var(--surface); box-shadow: var(--shadow); padding: 8px 12px;
+    }
+    .size.on { background: var(--primary); color: var(--primary-fg); }
+    .size b { display: block; font-size: 14px; }
+    .size small { font-size: 12px; opacity: .8; }
+    .qty { display: flex; align-items: center; background: var(--surface); box-shadow: var(--shadow); border-radius: 8px; }
+    .qty button { width: 44px; height: 44px; border: 0; background: transparent; font-size: 18px; }
+    .qty span { width: 28px; text-align: center; font-variant-numeric: tabular-nums; }
+    .tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--border); margin-top: 40px; }
+    .tabs button { height: 44px; padding: 0 16px; border: 0; background: transparent; font-weight: 600; color: var(--muted); }
+    .tabs button.on { color: var(--fg); border-bottom: 2px solid var(--primary); }
+    .tab-body { max-width: 62ch; padding: 20px 0; font-size: 15px; }
+
+    .cart-list { display: grid; grid-template-columns: 1fr 320px; gap: 36px; }
+    .line { display: flex; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--border); }
+    .line .art { width: 96px; height: 96px; border-radius: 8px; background: var(--linen); flex-shrink: 0; }
+    .sum { background: var(--surface); box-shadow: var(--shadow); border-radius: 12px; padding: 20px; height: fit-content; }
+    .sum-row { display: flex; justify-content: space-between; font-size: 14px; margin: 8px 0; }
+
+    .form { display: grid; gap: 12px; }
+    .form label { font-size: 14px; font-weight: 600; display: grid; gap: 6px; }
+    .form input, .form textarea, .form select {
+      height: 44px; border: 0; border-radius: 8px; padding: 0 12px;
+      background: var(--surface); box-shadow: var(--shadow); color: var(--fg); font: inherit;
+    }
+    .form textarea { height: 120px; padding: 12px; }
+    .thirds { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+
+    .drawer-bg { position: fixed; inset: 0; background: rgba(28,18,12,.4); z-index: 50; display: none; }
+    .drawer-bg.on { display: block; }
+    .drawer {
+      position: fixed; top: 0; right: 0; bottom: 0; width: min(400px, 100%);
+      background: var(--bg); z-index: 51; transform: translateX(100%);
+      transition: transform .25s cubic-bezier(.22,1,.36,1);
+      display: flex; flex-direction: column;
+    }
+    .drawer.on { transform: none; }
+    .drawer-h { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 1px solid var(--border); }
+    .drawer-h h2 { margin: 0; font-size: 1.3rem; }
+    .drawer-body { flex: 1; overflow: auto; padding: 8px 20px; }
+    .drawer-foot { border-top: 1px solid var(--border); padding: 16px 20px; display: grid; gap: 8px; }
+
+    .toast {
+      position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
+      background: var(--fg); color: var(--surface); padding: 10px 16px; border-radius: 8px;
+      font-size: 14px; z-index: 80; display: none;
+    }
+    .toast.on { display: block; }
+
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    .about-art { min-height: 240px; border-radius: 12px; background: linear-gradient(#8a5a32, #3d2414); margin-bottom: 12px; }
+    .about-art.pop { background: linear-gradient(#c47a2c, #5a2e12); min-height: 180px; }
+
+    @media (max-width: 900px) {
+      .search, nav.depts { display: none; }
+      .search.mobile, .mobile-nav.on { display: block; }
+      .menu-btn { display: grid; }
+      .promises .wrap, .depts-grid, .grid, .band .wrap, .gifts .wrap, .shop-layout, .pdp, .cart-list, footer.site .wrap, .about-grid, .thirds {
+        grid-template-columns: 1fr;
+      }
+      .grid, .depts-grid, .gift-grid { grid-template-columns: 1fr 1fr; }
+      .story { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="promo">Free shipping over $49 <span>·</span> Fall harvest is roasting now <span>·</span> New: local popcorn kettles</div>
+
+  <header class="site">
+    <div class="wrap topbar">
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Menu">☰</button>
+      <a class="logo" href="#/" data-nav="/">
+        <span class="mark" aria-hidden="true">
+          <svg viewBox="2 0 34 36" fill="none">
+            <rect x="10.5" y="0.6" width="14.5" height="8.4" rx="1.2" fill="#700C0E"/>
+            <rect x="10.5" y="6.6" width="14.5" height="2.4" fill="#3D5A45"/>
+            <rect x="7.2" y="8.4" width="21.2" height="2.1" rx="0.7" fill="#700C0E"/>
+            <path d="M10.6 10.6h13.4v8.6H15.2L10.6 23V10.6Z" fill="#FBF7F1"/>
+            <path d="M10.6 10.6h4.2v12.4L10.6 23V10.6Z" fill="#700C0E"/>
+            <circle cx="20.6" cy="14.2" r="1.05" fill="#700C0E"/>
+            <path d="M15 19.2h13.4v3.8h-9.2L15 26.2v-7Z" fill="#FBF7F1"/>
+            <path d="M17.2 19.5h1.35v2.9H17.2zm2.15 0h1.35v2.9h-1.35zm2.15 0h1.35v2.9h-1.35z" fill="#700C0E"/>
+            <ellipse cx="29.2" cy="21.6" rx="5.4" ry="4.7" fill="#6B3A22"/>
+            <path d="M26.6 19.4c1.6 1.4 3.5 1.8 5.1.4" stroke="#F4EDE3" stroke-width="1" stroke-linecap="round"/>
+            <path d="M24.6 21.2c1.4 1.2 2.8 1.2 4.2 0" stroke="#4A2818" stroke-width=".7" stroke-linecap="round"/>
+            <path d="M10.8 23.4h12.4l1.8 8.4H12.4L10.8 23.4Z" fill="#700C0E"/>
+            <path d="M12.2 25.2 22.6 26.7 21.3 31.6H14.4L12.2 25.2Z" fill="#FBF7F1"/>
+            <path d="M12.2 31.6h13.2l.6 2.8H11.6l.6-2.8Z" fill="#3D5A45"/>
+          </svg>
+        </span>
+        <span>
+          <strong>Holiday Nut Craving</strong>
+          <em>Est. 2023 · Fall relaunch</em>
+        </span>
+      </a>
+      <form class="search" id="searchForm">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
+        <input id="q" type="search" placeholder="Search almonds, caramel popcorn, gifts…" aria-label="Search the shop" />
+      </form>
+      <button class="icon-btn" id="cartBtn" aria-label="Cart">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 7h15l-1.5 9h-12z"/><path d="M6 7 5 3H2"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>
+        <span class="badge-count" id="cartCount" hidden>0</span>
+      </button>
+    </div>
+    <nav class="depts">
+      <ul class="wrap">
+        <li><a href="#/shop" data-nav="/shop">Shop all</a></li>
+        <li><a href="#/shop/nuts" data-nav="/shop/nuts">Nuts</a></li>
+        <li><a href="#/shop/popcorn" data-nav="/shop/popcorn">Popcorn</a></li>
+        <li><a href="#/shop/mixes" data-nav="/shop/mixes">Mixes</a></li>
+        <li><a href="#/shop/chocolate" data-nav="/shop/chocolate">Chocolate</a></li>
+        <li><a href="#/shop/gifts" data-nav="/shop/gifts">Gifts</a></li>
+        <li><a href="#/shop/harvest" data-nav="/shop/harvest">Harvest</a></li>
+        <li><a class="story" href="#/about" data-nav="/about">Our story</a></li>
+      </ul>
+    </nav>
+    <div class="wrap mobile-nav" id="mobileNav" style="display:none;padding:12px 0 16px">
+      <form class="search mobile" id="searchFormM" style="margin-bottom:8px">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
+        <input id="qM" type="search" placeholder="Search the shop" />
+      </form>
+      <div id="mobileLinks"></div>
+    </div>
+  </header>
+
+  <main id="app"></main>
+
+  <footer class="site">
+    <div class="wrap">
+      <div>
+        <a class="logo" href="#/" data-nav="/">
+          <span class="mark" aria-hidden="true">
+            <svg viewBox="2 0 34 36" fill="none">
+              <rect x="10.5" y="0.6" width="14.5" height="8.4" rx="1.2" fill="#700C0E"/>
+              <rect x="10.5" y="6.6" width="14.5" height="2.4" fill="#3D5A45"/>
+              <rect x="7.2" y="8.4" width="21.2" height="2.1" rx="0.7" fill="#700C0E"/>
+              <path d="M10.6 10.6h13.4v8.6H15.2L10.6 23V10.6Z" fill="#FBF7F1"/>
+              <path d="M10.6 10.6h4.2v12.4L10.6 23V10.6Z" fill="#700C0E"/>
+              <circle cx="20.6" cy="14.2" r="1.05" fill="#700C0E"/>
+              <path d="M15 19.2h13.4v3.8h-9.2L15 26.2v-7Z" fill="#FBF7F1"/>
+              <path d="M17.2 19.5h1.35v2.9H17.2zm2.15 0h1.35v2.9h-1.35zm2.15 0h1.35v2.9h-1.35z" fill="#700C0E"/>
+              <ellipse cx="29.2" cy="21.6" rx="5.4" ry="4.7" fill="#6B3A22"/>
+              <path d="M26.6 19.4c1.6 1.4 3.5 1.8 5.1.4" stroke="#F4EDE3" stroke-width="1" stroke-linecap="round"/>
+              <path d="M24.6 21.2c1.4 1.2 2.8 1.2 4.2 0" stroke="#4A2818" stroke-width=".7" stroke-linecap="round"/>
+              <path d="M10.8 23.4h12.4l1.8 8.4H12.4L10.8 23.4Z" fill="#700C0E"/>
+              <path d="M12.2 25.2 22.6 26.7 21.3 31.6H14.4L12.2 25.2Z" fill="#FBF7F1"/>
+              <path d="M12.2 31.6h13.2l.6 2.8H11.6l.6-2.8Z" fill="#3D5A45"/>
+            </svg>
+          </span>
+          <span><strong>Holiday Nut Craving</strong><em>Est. 2023 · Fall relaunch</em></span>
+        </a>
+        <p>A 2023 holiday shop, rebuilt for fall. Nuts roasted to order. Popcorn from a kettle down the road.</p>
+      </div>
+      <div>
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#/shop/nuts" data-nav="/shop/nuts">Nuts</a></li>
+          <li><a href="#/shop/popcorn" data-nav="/shop/popcorn">Popcorn</a></li>
+          <li><a href="#/shop/mixes" data-nav="/shop/mixes">Mixes</a></li>
+          <li><a href="#/shop/chocolate" data-nav="/shop/chocolate">Chocolate & sweets</a></li>
+          <li><a href="#/shop/gifts" data-nav="/shop/gifts">Gifts</a></li>
+          <li><a href="#/shop/harvest" data-nav="/shop/harvest">Fall harvest</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Help</h4>
+        <ul>
+          <li><a href="#/shipping" data-nav="/shipping">Shipping & freshness</a></li>
+          <li><a href="#/faq" data-nav="/faq">FAQ</a></li>
+          <li><a href="#/contact" data-nav="/contact">Contact</a></li>
+          <li><a href="#/about" data-nav="/about">Our story</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Harvest notes</h4>
+        <p>New kettles, tin drops, and roast days. No weekly noise.</p>
+        <form class="news" id="newsForm">
+          <input type="email" required placeholder="Email" aria-label="Email for harvest notes" />
+          <button class="btn forest" type="submit">Join</button>
+        </form>
+      </div>
+    </div>
+    <div class="legal"><div class="wrap"><span>© 2026 Holiday Nut Craving. Packed to order.</span><span>Allergen: peanuts and tree nuts in the same kitchen.</span></div></div>
+  </footer>
+
+  <div class="drawer-bg" id="drawerBg"></div>
+  <aside class="drawer" id="drawer" aria-label="Cart">
+    <div class="drawer-h">
+      <h2 id="drawerTitle">Cart</h2>
+      <button class="icon-btn" id="closeCart" aria-label="Close cart">✕</button>
+    </div>
+    <div class="drawer-body" id="drawerBody"></div>
+    <div class="drawer-foot" id="drawerFoot"></div>
+  </aside>
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const money = n => n.toLocaleString("en-US", { style: "currency", currency: "USD" });
+    const FREE = 49;
+    const nut = p => [
+      { id: "8oz", label: "8 oz", price: Math.round(p * 58) / 100 },
+      { id: "1lb", label: "1 lb", price: p },
+      { id: "2lb", label: "2 lb", price: Math.round(p * 188) / 100 },
+      { id: "5lb", label: "5 lb", price: Math.round(p * 435) / 100 },
+    ];
+    const pop = p => [
+      { id: "bag", label: "Family bag", price: p },
+      { id: "tin", label: "Share tin", price: Math.round(p * 172) / 100 },
+      { id: "twin", label: "Twin pack", price: Math.round(p * 190) / 100 },
+    ];
+    const gift = (p, label="Gift box") => [{ id: "gift", label, price: p }];
+    const hue = {
+      almonds: "#c48a3a", cashews: "#d2b48c", pecans: "#8b4513", walnuts: "#6b3a22",
+      pistachios: "#6b8f3a", macadamias: "#f0e0b8", mixed: "#b8863a", peanuts: "#c9a227",
+      butter: "#e8c84a", caramel: "#c47a2c", kettle: "#e6d39a", cheddar: "#efc14a",
+      mix: "#d49a3a", peppermint: "#e8d6d6", maple: "#b85a20", chili: "#c45a2c",
+      apple: "#c47a4a", trail: "#8a4a32", party: "#b07040", cranberries: "#f2ece4",
+      tin: "#700C0E", tray: "#6b3a22", trio: "#c47a2c", basket: "#5a2e16"
+    };
+
+    const products = [
+      { slug:"honey-roasted-almonds", name:"Honey Roasted Almonds", dept:"nuts", family:"almonds", tag:"Warm honey glaze, still a little crunch.", desc:"California almonds tossed in a thin honey roast so they stay crisp, not sticky. The shop's first bestseller from 2023.", ing:"Almonds, honey, cane sugar, sunflower oil, sea salt.", rating:4.9, reviews:214, badges:["bestseller"], sizes:nut(11.99), featured:1, flavor:"sweet" },
+      { slug:"california-raw-almonds", name:"California Raw Almonds", dept:"nuts", family:"almonds", tag:"Unroasted. Clean. Everyday.", desc:"Whole raw almonds with the skin on. For baking or the jar on the counter.", ing:"Raw almonds.", rating:4.7, reviews:88, badges:[], sizes:nut(9.49), flavor:"salty" },
+      { slug:"smoked-sea-salt-almonds", name:"Smoked Sea Salt Almonds", dept:"nuts", family:"almonds", tag:"A little campfire, a lot of crunch.", desc:"Dry-roasted almonds finished with smoked sea salt.", ing:"Almonds, sunflower oil, smoked sea salt.", rating:4.8, reviews:61, badges:["harvest"], sizes:nut(12.49), flavor:"salty" },
+      { slug:"butter-toffee-cashews", name:"Butter Toffee Cashews", dept:"nuts", family:"cashews", tag:"The candy-jar cashew.", desc:"Whole cashews in a butter toffee shell that shatters.", ing:"Cashews, butter, cane sugar, brown sugar, vanilla, sea salt.", rating:4.9, reviews:176, badges:["bestseller"], sizes:nut(15.99), featured:1, flavor:"sweet" },
+      { slug:"roasted-salted-cashews", name:"Roasted Salted Cashews", dept:"nuts", family:"cashews", tag:"The weeknight cashew.", desc:"Large whole cashews, oil-roasted and salted just enough.", ing:"Cashews, sunflower oil, sea salt.", rating:4.8, reviews:142, badges:[], sizes:nut(13.99), flavor:"salty" },
+      { slug:"maple-candied-pecans", name:"Maple Candied Pecans", dept:"nuts", family:"pecans", tag:"Fall in a handful.", desc:"Pecan halves candied with real maple. Made for cheese boards.", ing:"Pecans, maple syrup, cane sugar, cinnamon, sea salt.", rating:5, reviews:97, badges:["harvest","bestseller"], sizes:nut(16.49), featured:1, flavor:"sweet" },
+      { slug:"cinnamon-sugar-pecans", name:"Cinnamon Sugar Pecans", dept:"nuts", family:"pecans", tag:"The mall-cart classic, done properly.", desc:"Pecans rolled in cinnamon sugar while they're still warm.", ing:"Pecans, cane sugar, cinnamon, vanilla, sea salt.", rating:4.8, reviews:73, badges:["harvest"], sizes:nut(15.49), flavor:"sweet" },
+      { slug:"walnut-halves", name:"Walnut Halves & Pieces", dept:"nuts", family:"walnuts", tag:"Fresh, not bitter.", desc:"English walnut halves packed quickly so the oils stay sweet.", ing:"Walnuts.", rating:4.6, reviews:54, badges:[], sizes:nut(12.99), flavor:"salty" },
+      { slug:"colossal-pistachios", name:"Colossal Pistachios", dept:"nuts", family:"pistachios", tag:"The ones that actually open.", desc:"Jumbo roasted pistachios, lightly salted.", ing:"Pistachios, sea salt.", rating:4.9, reviews:119, badges:["bestseller"], sizes:nut(18.99), featured:1, flavor:"salty" },
+      { slug:"island-macadamias", name:"Island Macadamias", dept:"nuts", family:"macadamias", tag:"Buttery, barely salted.", desc:"Dry-roasted macadamias with a pinch of sea salt.", ing:"Macadamia nuts, sea salt.", rating:4.8, reviews:40, badges:[], sizes:nut(24.99), flavor:"buttery" },
+      { slug:"gourmet-mixed-nuts", name:"Gourmet Mixed Nuts", dept:"nuts", family:"mixed", tag:"No filler peanuts. On purpose.", desc:"Cashews, almonds, pecans, and macadamias. The original Holiday Nut Craving blend.", ing:"Cashews, almonds, pecans, macadamia nuts, sunflower oil, sea salt.", rating:4.9, reviews:268, badges:["bestseller"], sizes:nut(14.99), featured:1, flavor:"salty" },
+      { slug:"honey-roasted-peanuts", name:"Honey Roasted Peanuts", dept:"nuts", family:"peanuts", tag:"The ballpark, but better.", desc:"Virginia peanuts in a honey roast. A 5 lb bag is the right move.", ing:"Peanuts, honey, cane sugar, sunflower oil, sea salt.", rating:4.7, reviews:91, badges:[], sizes:nut(7.99), flavor:"sweet" },
+      { slug:"classic-movie-butter", name:"Classic Movie Butter", dept:"popcorn", family:"butter", tag:"Theater butter, kettle-popped.", desc:"Yellow popcorn popped in small kettles and tossed with real butter seasoning.", ing:"Popcorn, butter, sunflower oil, sea salt.", rating:4.8, reviews:64, badges:["local","new"], sizes:pop(8.99), featured:1, flavor:"buttery" },
+      { slug:"small-batch-caramel", name:"Small-Batch Caramel", dept:"popcorn", family:"caramel", tag:"Slow caramel. Loud crunch.", desc:"Popcorn coated in a cooked caramel we make in copper kettles.", ing:"Popcorn, brown sugar, butter, corn syrup, vanilla, baking soda, sea salt.", rating:5, reviews:132, badges:["local","bestseller"], sizes:pop(10.99), featured:1, flavor:"sweet" },
+      { slug:"farmstand-kettle-corn", name:"Farmstand Kettle Corn", dept:"popcorn", family:"kettle", tag:"Sweet, salt, still hot in your head.", desc:"Sugar and salt in the kettle, not dusted on after.", ing:"Popcorn, cane sugar, sunflower oil, sea salt.", rating:4.8, reviews:77, badges:["local"], sizes:pop(9.49), flavor:"sweet" },
+      { slug:"white-cheddar-dust", name:"White Cheddar Dust", dept:"popcorn", family:"cheddar", tag:"Sharp cheddar that sticks.", desc:"White cheddar powder on kettle-popped corn.", ing:"Popcorn, cheddar cheese powder (milk), sunflower oil, sea salt.", rating:4.7, reviews:58, badges:["local"], sizes:pop(9.99), flavor:"salty" },
+      { slug:"chicago-mix", name:"Chicago Mix", dept:"popcorn", family:"mix", tag:"Caramel and cheddar in the same handful.", desc:"Half small-batch caramel, half white cheddar.", ing:"Caramel popcorn, cheddar popcorn. Contains milk.", rating:4.9, reviews:101, badges:["local","bestseller"], sizes:pop(11.49), featured:1, flavor:"sweet" },
+      { slug:"maple-bacon-popcorn", name:"Maple Bacon Popcorn", dept:"popcorn", family:"maple", tag:"Breakfast, but it's popcorn.", desc:"Maple caramel corn with a smoked bacon seasoning.", ing:"Popcorn, maple syrup, brown sugar, butter, bacon seasoning, sea salt.", rating:4.8, reviews:36, badges:["local","harvest"], sizes:pop(12.49), flavor:"sweet" },
+      { slug:"holiday-peppermint-crunch", name:"Holiday Peppermint Crunch", dept:"popcorn", family:"peppermint", tag:"Candy cane, white chocolate, kettle corn.", desc:"White-chocolate drizzle and crushed peppermint over kettle corn.", ing:"Popcorn, white chocolate (milk), crushed peppermint, cane sugar.", rating:4.7, reviews:29, badges:["local","new","harvest"], sizes:pop(11.99), featured:1, flavor:"sweet" },
+      { slug:"caramel-cashew-crunch", name:"Caramel Cashew Crunch", dept:"popcorn", family:"caramel", tag:"Popcorn with the good cashews in it.", desc:"Small-batch caramel corn folded with roasted cashews.", ing:"Popcorn, cashews, brown sugar, butter, vanilla, sea salt.", rating:4.9, reviews:84, badges:["local","bestseller"], sizes:pop(13.99), featured:1, flavor:"sweet" },
+      { slug:"chili-lime-popcorn", name:"Chili Lime Popcorn", dept:"popcorn", family:"chili", tag:"Heat, lime, no gimmick.", desc:"Chili powder, lime zest, and sea salt on kettle-popped corn.", ing:"Popcorn, chili powder, lime, sunflower oil, sea salt.", rating:4.6, reviews:22, badges:["local","new"], sizes:pop(10.49), flavor:"spicy" },
+      { slug:"harvest-apple-cinnamon", name:"Harvest Apple Cinnamon", dept:"popcorn", family:"apple", tag:"Pie, without the pie.", desc:"Cinnamon sugar popcorn with dried apple pieces.", ing:"Popcorn, dried apple, cinnamon, cane sugar, sunflower oil.", rating:4.7, reviews:31, badges:["local","harvest"], sizes:pop(11.49), flavor:"sweet" },
+      { slug:"harvest-trail-mix", name:"Harvest Trail Mix", dept:"mixes", family:"trail", tag:"Pecans, almonds, cranberries, pepitas.", desc:"A fall mix without leftover candy.", ing:"Almonds, pecans, dried cranberries, pumpkin seeds, sea salt.", rating:4.8, reviews:70, badges:["harvest"], sizes:nut(12.99), featured:1, flavor:"sweet" },
+      { slug:"cranberry-pecan-mix", name:"Cranberry Pecan Mix", dept:"mixes", family:"trail", tag:"The Thanksgiving mix.", desc:"Pecan halves and tart cranberries, barely sweetened.", ing:"Pecans, dried cranberries, sunflower oil, sea salt.", rating:4.8, reviews:45, badges:["harvest"], sizes:nut(13.49), flavor:"sweet" },
+      { slug:"sweet-salty-mix", name:"Sweet & Salty Mix", dept:"mixes", family:"party", tag:"Honey nuts, pretzels, a little chocolate.", desc:"Honey roasted peanuts, pretzels, and chocolate gems.", ing:"Peanuts, pretzels (wheat), milk chocolate, honey, sea salt.", rating:4.6, reviews:52, badges:[], sizes:nut(11.99), flavor:"sweet" },
+      { slug:"dark-chocolate-almonds", name:"Dark Chocolate Almonds", dept:"chocolate", family:"almonds", tag:"72% dark, whole almonds.", desc:"Roasted almonds in a dark chocolate shell. Not waxy.", ing:"Almonds, dark chocolate, vanilla.", rating:4.9, reviews:108, badges:["bestseller"], sizes:nut(14.99), featured:1, flavor:"chocolate" },
+      { slug:"milk-chocolate-pecans", name:"Milk Chocolate Pecans", dept:"chocolate", family:"pecans", tag:"Pecan half, milk chocolate coat.", desc:"The holiday tin piece people pick first.", ing:"Pecans, milk chocolate, vanilla.", rating:4.8, reviews:66, badges:["harvest"], sizes:nut(15.49), flavor:"chocolate" },
+      { slug:"yogurt-cranberries", name:"Yogurt Cranberries", dept:"chocolate", family:"cranberries", tag:"Tart fruit, cream shell.", desc:"Dried cranberries in a yogurt coating.", ing:"Dried cranberries, yogurt coating.", rating:4.6, reviews:41, badges:["harvest"], sizes:nut(11.99), flavor:"sweet" },
+      { slug:"holiday-gift-tin", name:"Holiday Gift Tin", dept:"gifts", family:"tin", tag:"Four nuts. One tin. Ready to wrap.", desc:"A burgundy tin with honey almonds, toffee cashews, maple pecans, and mixed nuts.", ing:"See individual nuts.", rating:4.9, reviews:155, badges:["bestseller","harvest"], sizes:gift(39,"1 tin"), featured:1, flavor:"sweet" },
+      { slug:"wooden-tray-sampler", name:"Wooden Tray Sampler", dept:"gifts", family:"tray", tag:"The host gift that stays on the table.", desc:"A walnut tray with jars of mixed nuts, caramel popcorn, and cranberry pecan mix.", ing:"Assorted nuts and popcorn.", rating:5, reviews:48, badges:["harvest"], sizes:gift(54,"1 tray"), featured:1, flavor:"sweet" },
+      { slug:"local-popcorn-trio", name:"Local Popcorn Trio", dept:"gifts", family:"trio", tag:"Caramel, cheddar, Chicago.", desc:"Three family bags of the kettle line.", ing:"See popcorn flavors. Contains milk.", rating:4.9, reviews:39, badges:["local","new"], sizes:gift(32,"3 bags"), featured:1, flavor:"sweet" },
+      { slug:"fall-harvest-basket", name:"Fall Harvest Basket", dept:"gifts", family:"basket", tag:"The big one.", desc:"Maple pecans, harvest trail mix, caramel cashew crunch, dark chocolate almonds, and the holiday tin.", ing:"Assorted nuts, popcorn, and chocolate.", rating:5, reviews:27, badges:["harvest"], sizes:gift(68,"1 basket"), flavor:"sweet" },
+    ];
+
+    const depts = [
+      { id:"nuts", name:"Nuts", blurb:"Roasted to order — almonds, cashews, pecans, pistachios, and the mixes we built the shop around." },
+      { id:"popcorn", name:"Popcorn", blurb:"A local kettle line we added for the relaunch. Small-batch, popped nearby, packed the same day." },
+      { id:"mixes", name:"Mixes", blurb:"Trail and party mixes with a harvest lean — cranberry, pecan, sweet-and-salty." },
+      { id:"chocolate", name:"Chocolate & sweets", blurb:"Chocolate-covered nuts and yogurt cranberries for the cookie tin." },
+      { id:"gifts", name:"Gifts", blurb:"Tins, wooden trays, and popcorn trios ready to put on a porch." },
+    ];
+
+    const cart = JSON.parse(localStorage.getItem("hnc-cart") || "[]");
+    const saveCart = () => localStorage.setItem("hnc-cart", JSON.stringify(cart));
+    const find = slug => products.find(p => p.slug === slug);
+    const fromPrice = p => Math.min(...p.sizes.map(s => s.price));
+    const defSize = p => p.sizes.find(s => s.id === "1lb") || p.sizes[0];
+    const art = (p, extra="") => `<div class="art ${extra}" style="background:radial-gradient(circle at 35% 30%, #fff6,#0000 40%), ${hue[p.family] || "#8a5a32"}"></div>`;
+    const pills = p => p.badges.map(b => `<span class="pill ${b==="local"?"local":b==="new"?"new":"best"}">${b==="local"?"Local kettle":b}</span>`).join("");
+    const stars = p => `<div class="stars"><b>${"★".repeat(Math.round(p.rating))}${"☆".repeat(5-Math.round(p.rating))}</b> ${p.rating.toFixed(1)} (${p.reviews})</div>`;
+
+    function card(p) {
+      const size = defSize(p);
+      return `<article>
+        <a class="thumb" href="#/product/${p.slug}">${art(p)}<div class="pills">${pills(p)}</div></a>
+        <p class="meta">${p.family}</p>
+        <h3><a href="#/product/${p.slug}">${p.name}</a></h3>
+        <p class="tagline">${p.tag}</p>
+        ${stars(p)}
+        <div class="buy"><p class="price">From <strong>${money(fromPrice(p))}</strong></p>
+        <button class="btn sm" data-add="${p.slug}" data-size="${size.id}">Add</button></div>
+      </article>`;
+    }
+
+    function toast(msg) {
+      const el = document.getElementById("toast");
+      el.textContent = msg; el.classList.add("on");
+      setTimeout(() => el.classList.remove("on"), 1800);
+    }
+
+    function add(slug, sizeId, qty=1) {
+      const i = cart.findIndex(l => l.slug===slug && l.sizeId===sizeId);
+      if (i>=0) cart[i].qty += qty; else cart.push({ slug, sizeId, qty });
+      saveCart(); renderCart(); openCart(); toast("Added to cart");
+    }
+    function setQty(slug, sizeId, qty) {
+      const i = cart.findIndex(l => l.slug===slug && l.sizeId===sizeId);
+      if (i<0) return;
+      if (qty<=0) cart.splice(i,1); else cart[i].qty = qty;
+      saveCart(); renderCart();
+    }
+    function lines() {
+      return cart.map(l => {
+        const p = find(l.slug); const s = p?.sizes.find(x => x.id===l.sizeId);
+        if (!p || !s) return null;
+        return { ...l, p, s, total: Math.round(s.price * l.qty * 100)/100 };
+      }).filter(Boolean);
+    }
+    function count() { return cart.reduce((n,l)=>n+l.qty,0); }
+    function subtotal() { return Math.round(lines().reduce((n,l)=>n+l.total,0)*100)/100; }
+
+    function renderCart() {
+      const n = count();
+      const badge = document.getElementById("cartCount");
+      badge.hidden = n===0; badge.textContent = n;
+      document.getElementById("drawerTitle").textContent = n ? `Cart (${n})` : "Cart";
+      const ls = lines();
+      const body = document.getElementById("drawerBody");
+      const foot = document.getElementById("drawerFoot");
+      if (!ls.length) {
+        body.innerHTML = `<div style="text-align:center;padding:48px 12px"><h3>Your cart is empty</h3><p class="tagline">Nuts, popcorn, and gifts packed the day they ship.</p><a class="btn" href="#/shop" data-nav="/shop" onclick="closeCart()">Shop the harvest</a></div>`;
+        foot.innerHTML = "";
+        return;
+      }
+      const left = Math.max(0, FREE - subtotal());
+      body.innerHTML = `<p style="font-size:14px;color:var(--muted)">${left>0?`Add ${money(left)} more for free shipping.`:"Free shipping unlocked."}</p>` +
+        ls.map(l => `<div class="line">
+          <div class="art" style="background:${hue[l.p.family]}"></div>
+          <div style="flex:1">
+            <b>${l.p.name}</b>
+            <div class="tagline">${l.s.label}</div>
+            <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
+              <div class="qty">
+                <button data-qty="${l.slug}|${l.sizeId}|${l.qty-1}">−</button>
+                <span>${l.qty}</span>
+                <button data-qty="${l.slug}|${l.sizeId}|${l.qty+1}">+</button>
+              </div>
+              <button style="border:0;background:none;color:var(--muted);text-decoration:underline" data-qty="${l.slug}|${l.sizeId}|0">Remove</button>
+              <strong style="margin-left:auto">${money(l.total)}</strong>
+            </div>
+          </div>
+        </div>`).join("");
+      foot.innerHTML = `<div class="sum-row"><span>Subtotal</span><strong>${money(subtotal())}</strong></div>
+        <a class="btn full" href="#/checkout" onclick="closeCart()">Checkout</a>
+        <a class="btn ghost full" href="#/cart" onclick="closeCart()">View cart</a>`;
+    }
+    function openCart(){ document.getElementById("drawer").classList.add("on"); document.getElementById("drawerBg").classList.add("on"); }
+    function closeCart(){ document.getElementById("drawer").classList.remove("on"); document.getElementById("drawerBg").classList.remove("on"); }
+
+    function listFor(dept) {
+      if (!dept || dept==="all") return products.slice();
+      if (dept==="harvest") return products.filter(p => p.badges.includes("harvest"));
+      return products.filter(p => p.dept===dept);
+    }
+
+    function shopView(list, title, blurb) {
+      const families = [...new Set(list.map(p=>p.family))];
+      const flavors = [...new Set(list.map(p=>p.flavor))];
+      return `<div class="shop-layout">
+        <aside class="filters">
+          <h1>${title}</h1>
+          <p>${blurb}</p>
+          <p class="count">${list.length} items</p>
+          ${families.length>1?`<div class="filter-label">Type</div><div class="chips" id="fam">${["all",...families].map(f=>`<button class="chip${f==="all"?" on":""}" data-fam="${f}">${f}</button>`).join("")}</div>`:""}
+          ${flavors.length>1?`<div class="filter-label">Flavor</div><div class="chips" id="flav">${["all",...flavors].map(f=>`<button class="chip${f==="all"?" on":""}" data-flav="${f}">${f}</button>`).join("")}</div>`:""}
+        </aside>
+        <div>
+          <div class="toolbar"><label for="sort">Sort</label>
+            <select id="sort"><option value="featured">Featured</option><option value="price-asc">Price: low to high</option><option value="price-desc">Price: high to low</option><option value="rating">Top rated</option><option value="name">Name</option></select>
+          </div>
+          <div class="grid" id="grid">${list.map(card).join("")}</div>
+        </div>
+      </div>`;
+    }
+
+    function home() {
+      const featured = products.filter(p=>p.featured).slice(0,8);
+      const popcorn = products.filter(p=>p.dept==="popcorn").slice(0,4);
+      const gifts = products.filter(p=>p.dept==="gifts");
+      return `
+      <section class="hero"><div class="hero-bg"></div>
+        <div class="hero-inner"><div class="wrap">
+          <p class="kicker">Fall 2026 relaunch</p>
+          <h1>The nuts you crave. The popcorn the town already buys.</h1>
+          <p>Holiday Nut Craving is back — roasted to order, packed the day it ships, with a new local kettle line for harvest season.</p>
+          <div class="row">
+            <a class="btn" href="#/shop">Shop the harvest</a>
+            <a class="btn ghost" href="#/shop/popcorn">Shop popcorn</a>
+          </div>
+        </div></div>
+      </section>
+      <section class="promises"><div class="wrap">
+        <div class="promise"><div>📦</div><div><b>Packed to order</b><span>Roasted and bagged the day it leaves the kitchen.</span></div></div>
+        <div class="promise"><div>🚚</div><div><b>Free shipping $49+</b><span>Continental U.S. Ground on qualifying orders.</span></div></div>
+        <div class="promise"><div>🌿</div><div><b>Local popcorn</b><span>Kettle-popped nearby. New for the relaunch.</span></div></div>
+      </div></section>
+      <section class="block"><div class="wrap">
+        <div class="sec-head"><p class="kicker">Departments</p><h2>Shop by craving</h2></div>
+        <div class="depts-grid">${depts.map(d=>`<a class="dept-tile" href="#/shop/${d.id}"><span>${d.name}</span></a>`).join("")}</div>
+      </div></section>
+      <section class="block" style="padding-top:0"><div class="wrap">
+        <div class="sec-head"><p class="kicker">This week</p><h2>Bestsellers</h2></div>
+        <div class="grid">${featured.map(card).join("")}</div>
+      </div></section>
+      <section class="band"><div class="wrap">
+        <div class="band-art"></div>
+        <div>
+          <p class="kicker">New for fall</p>
+          <h2>The popcorn shop next door</h2>
+          <p>Popcorn is the growing business around here. We partnered with a kettle down the road — caramel, cheddar, Chicago mix, peppermint crunch — packed the same day as the nuts.</p>
+          <a class="btn ghost" href="#/shop/popcorn" style="margin-top:20px">Shop the kettle line</a>
+        </div>
+      </div></section>
+      <section class="block"><div class="wrap">
+        <div class="sec-head"><p class="kicker">Local kettles</p><h2>Popcorn, packed today</h2></div>
+        <div class="grid">${popcorn.map(card).join("")}</div>
+      </div></section>
+      <section class="gifts"><div class="wrap">
+        <div>
+          <p class="kicker">Gifts</p>
+          <h2>Tins, trays, and porch drops</h2>
+          <p>The same gift tin we launched with in 2023, plus a wooden tray sampler and a local popcorn trio.</p>
+          <a class="btn" href="#/shop/gifts" style="margin-top:20px">Shop gifts</a>
+        </div>
+        <div class="gift-grid">${gifts.slice(0,4).map(p=>`<a href="#/product/${p.slug}">${art(p)}<p>${p.name}</p></a>`).join("")}</div>
+      </div></section>`;
+    }
+
+    function pageShop(dept) {
+      const d = depts.find(x=>x.id===dept);
+      const harvest = dept==="harvest";
+      const title = harvest ? "Fall harvest" : (d?.name || "Shop all");
+      const blurb = harvest ? "Maple pecans, cranberry mixes, peppermint crunch, and the tins we pack for the season." : (d?.blurb || "Nuts, local popcorn, mixes, chocolate, and gifts — packed the day they ship.");
+      const list = listFor(dept || "all");
+      return `<div class="page on"><div class="wrap">
+        <div class="crumb"><a href="#/">Home</a> / ${dept?`<a href="#/shop">Shop</a> / `:""}${title}</div>
+        ${shopView(list, title, blurb)}
+      </div></div>`;
+    }
+
+    function pageProduct(slug) {
+      const p = find(slug);
+      if (!p) return `<div class="page on"><div class="wrap"><h1>We don’t carry that one</h1><a class="btn" href="#/shop">Back to shop</a></div></div>`;
+      const related = products.filter(x=>x.slug!==p.slug && (x.dept===p.dept || x.family===p.family)).slice(0,4);
+      return `<div class="page on"><div class="wrap">
+        <div class="crumb"><a href="#/">Home</a> / <a href="#/shop">Shop</a> / <a href="#/shop/${p.dept}">${p.dept}</a> / ${p.name}</div>
+        <div class="pdp">
+          <div class="pdp-art">${art(p)}</div>
+          <div>
+            <p class="meta">${p.dept} · ${p.family}</p>
+            <h1>${p.name}</h1>
+            <p class="tagline">${p.tag}</p>
+            ${stars(p)}
+            <p id="pdpPrice" style="font-family:var(--font-display);font-size:2rem;font-weight:600;margin:16px 0 0">${money(defSize(p).price)}</p>
+            <fieldset style="border:0;padding:16px 0 0">
+              <legend style="font-weight:600;font-size:14px">Size</legend>
+              <div class="sizes">${p.sizes.map((s,i)=>`<button class="size${i===0 || s.id===defSize(p).id?" on":""}" data-size="${s.id}"><b>${s.label}</b><small>${money(s.price)}</small></button>`).join("")}</div>
+            </fieldset>
+            <div class="row">
+              <div class="qty"><button id="minus">−</button><span id="qty">1</span><button id="plus">+</button></div>
+              <button class="btn" id="addPdp" style="flex:1">Add to cart</button>
+            </div>
+            <p class="tagline">Packed to order. Free shipping over $49.</p>
+          </div>
+        </div>
+        <div class="tabs">
+          <button class="on" data-tab="d">Details</button>
+          <button data-tab="i">Ingredients</button>
+          <button data-tab="r">Reviews</button>
+        </div>
+        <div class="tab-body" id="tabBody">${p.desc}</div>
+        <h2 style="margin-top:36px">You may also like</h2>
+        <div class="grid" style="margin-top:18px">${related.map(card).join("")}</div>
+      </div></div>`;
+    }
+
+    function pageCart() {
+      const ls = lines();
+      if (!ls.length) return `<div class="page on"><div class="wrap"><div class="crumb"><a href="#/">Home</a> / Cart</div><h1>Cart</h1><p class="tagline">Nothing in the cart yet.</p><a class="btn" href="#/shop">Continue shopping</a></div></div>`;
+      const left = Math.max(0, FREE-subtotal());
+      return `<div class="page on"><div class="wrap">
+        <div class="crumb"><a href="#/">Home</a> / Cart</div><h1>Cart</h1>
+        <div class="cart-list">
+          <div>${ls.map(l=>`<div class="line">
+            <div class="art" style="background:${hue[l.p.family]}"></div>
+            <div style="flex:1">
+              <a href="#/product/${l.slug}"><b>${l.p.name}</b></a>
+              <div class="tagline">${l.s.label}</div>
+              <div style="margin-top:10px;display:flex;gap:10px;align-items:center">
+                <div class="qty"><button data-qty="${l.slug}|${l.sizeId}|${l.qty-1}">−</button><span>${l.qty}</span><button data-qty="${l.slug}|${l.sizeId}|${l.qty+1}">+</button></div>
+                <button style="border:0;background:none;color:var(--muted)" data-qty="${l.slug}|${l.sizeId}|0">Remove</button>
+                <strong style="margin-left:auto">${money(l.total)}</strong>
+              </div>
+            </div>
+          </div>`).join("")}</div>
+          <aside class="sum">
+            <h2>Summary</h2>
+            <div class="sum-row"><span>Subtotal</span><span>${money(subtotal())}</span></div>
+            <div class="sum-row"><span>Shipping</span><span>${left>0?`Add ${money(left)}`:"Free"}</span></div>
+            <p class="tagline">Taxes calculated at the next step.</p>
+            <a class="btn full" href="#/checkout">Checkout</a>
+          </aside>
+        </div>
+      </div></div>`;
+    }
+
+    function pageCheckout() {
+      const ls = lines();
+      if (!ls.length) return `<div class="page on"><div class="wrap"><h1>Checkout</h1><p>Your cart is empty.</p><a class="btn" href="#/shop">Shop the harvest</a></div></div>`;
+      const ship = subtotal()>=FREE ? 0 : 8.95;
+      return `<div class="page on"><div class="wrap">
+        <div class="crumb"><a href="#/">Home</a> / <a href="#/cart">Cart</a> / Checkout</div>
+        <h1>Checkout</h1>
+        <p class="tagline">This is a local preview — no card is charged. Place the order to see a packed confirmation.</p>
+        <form class="cart-list" id="checkForm" style="margin-top:28px">
+          <div class="form">
+            <h2>Shipping</h2>
+            <label>Full name <input name="name" required autocomplete="name" /></label>
+            <label>Email <input name="email" type="email" required /></label>
+            <label>Address <input name="address" required /></label>
+            <div class="thirds">
+              <label>City <input name="city" required /></label>
+              <label>State <input name="region" required /></label>
+              <label>ZIP <input name="zip" required /></label>
+            </div>
+            <h2>Payment</h2>
+            <p class="tagline">Card capture is off until the shop goes fully live this fall.</p>
+          </div>
+          <aside class="sum">
+            <h2>Order</h2>
+            ${ls.map(l=>`<div class="sum-row"><span>${l.p.name} × ${l.qty}</span><span>${money(l.total)}</span></div>`).join("")}
+            <div class="sum-row"><span>Shipping</span><span>${ship?money(ship):"Free"}</span></div>
+            <div class="sum-row"><b>Total</b><b>${money(subtotal()+ship)}</b></div>
+            <button class="btn full" type="submit">Place order</button>
+          </aside>
+        </form>
+      </div></div>`;
+    }
+
+    function pageOrder() {
+      const o = JSON.parse(localStorage.getItem("hnc-last-order") || "null");
+      if (!o) return `<div class="page on"><div class="wrap"><h1>No order here</h1><a class="btn" href="#/shop">Shop the harvest</a></div></div>`;
+      return `<div class="page on"><div class="wrap" style="max-width:640px">
+        <p class="kicker" style="color:var(--forest)">Packed for the kitchen</p>
+        <h1>Thank you, ${o.name.split(" ")[0]}</h1>
+        <p class="tagline">Order <b>${o.id}</b> is saved in this browser. We’ll roast and pop it when live checkout is on this fall.</p>
+        <div class="sum" style="margin-top:24px">
+          <p class="tagline">Ships to ${o.address}, ${o.city}, ${o.region} ${o.zip}</p>
+          ${o.lines.map(l=>`<div class="sum-row"><span>${l.name} × ${l.qty}</span><span>${money(l.total)}</span></div>`).join("")}
+          <div class="sum-row"><b>Total</b><b>${money(o.total)}</b></div>
+        </div>
+        <a class="btn" href="#/shop" style="margin-top:20px">Keep shopping</a>
+      </div></div>`;
+    }
+
+    function pageAbout() {
+      return `<div class="page on"><div class="wrap">
+        <div class="crumb"><a href="#/">Home</a> / Our story</div>
+        <div class="about-grid">
+          <div>
+            <p class="kicker">Est. 2023</p>
+            <h1>A first website. A fall relaunch.</h1>
+            <p>Holiday Nut Craving started three years ago as a small holiday shop — a first site from someone just learning how to build on the web, who wanted better nuts on the table than the dusty mixed tin from the grocery aisle.</p>
+            <p>The original WordPress shop went quiet. The craving didn’t. This fall we’re putting the same cream-and-cranberry pantry back online, with a real catalog, gift tins, and something the first version never had: popcorn.</p>
+            <p>Popcorn is a growing business around here. We partnered with a kettle down the road so the caramel, cheddar, and Chicago mix ship with the same roast-to-order promise as the cashews.</p>
+            <a class="btn" href="#/shop">Shop the harvest</a>
+          </div>
+          <div><div class="about-art"></div><div class="about-art pop"></div></div>
+        </div>
+      </div></div>`;
+    }
+
+    function pageContact() {
+      return `<div class="page on"><div class="wrap" style="max-width:640px">
+        <div class="crumb"><a href="#/">Home</a> / Contact</div>
+        <h1>Write the kitchen</h1>
+        <p class="tagline">Corporate tins, wholesale popcorn, or a question about an order. Email hello@holidaynutcraving.com or use the form.</p>
+        <form class="form" id="contactForm" style="margin-top:24px">
+          <label>Name <input name="name" required /></label>
+          <label>Email <input name="email" type="email" required /></label>
+          <label>Topic <select name="topic"><option>An order</option><option>Corporate gifts</option><option>Wholesale popcorn</option><option>Something else</option></select></label>
+          <label>Message <textarea name="message" required></textarea></label>
+          <button class="btn" type="submit">Send note</button>
+        </form>
+      </div></div>`;
+    }
+
+    function pageSearch(q) {
+      const needle = (q||"").toLowerCase();
+      const list = needle ? products.filter(p => [p.name,p.tag,p.desc,p.family,p.dept].join(" ").toLowerCase().includes(needle)) : [];
+      return `<div class="page on"><div class="wrap">
+        <div class="crumb"><a href="#/">Home</a> / Search</div>
+        <h1>${needle ? `Results for “${q}”` : "Search"}</h1>
+        <p class="tagline">${needle ? list.length + " items" : "Try almonds, caramel, or gifts."}</p>
+        <div class="grid" style="margin-top:24px">${list.map(card).join("") || "<p>Nothing in this view yet.</p>"}</div>
+      </div></div>`;
+    }
+
+    function pageFaq() {
+      const faqs = [
+        ["When do you roast and pop?","Nuts are roasted to order. Popcorn comes from a local kettle and is packed the same day it ships."],
+        ["Do you ship peanuts and tree nuts from the same kitchen?","Yes. If you have an allergy, assume cross-contact and skip us."],
+        ["What’s new this fall?","The original cream-and-cranberry shop is back, plus a local popcorn line."],
+        ["Can I order corporate tins?","Yes. Use the contact form with the gifts topic and a headcount."],
+        ["Is checkout charging cards yet?","Not in this preview. You can build a cart and place a sample order."],
+        ["What’s your freshness window?","Thirty days from pack date, or we’ll make it right."],
+      ];
+      return `<div class="page on"><div class="wrap" style="max-width:680px">
+        <div class="crumb"><a href="#/">Home</a> / FAQ</div><h1>FAQ</h1>
+        ${faqs.map(([q,a])=>`<div style="padding:20px 0;border-bottom:1px solid var(--border)"><h3>${q}</h3><p class="tagline">${a}</p></div>`).join("")}
+      </div></div>`;
+    }
+
+    function pageShipping() {
+      return `<div class="page on"><div class="wrap" style="max-width:680px">
+        <div class="crumb"><a href="#/">Home</a> / Shipping</div>
+        <h1>Shipping & freshness</h1>
+        <p>Free ground shipping on orders ${money(FREE)} and up inside the continental U.S. Under that, a flat ${money(8.95)} covers the box.</p>
+        <p>Nuts roast when you order. Popcorn pops at the local kettle and is packed the same day.</p>
+        <p>Most orders leave within two business days in season. Holiday weeks run longer — order tins early.</p>
+      </div></div>`;
+    }
+
+    function route() {
+      const hash = location.hash.replace(/^#/, "") || "/";
+      const [path, qs] = hash.split("?");
+      const parts = path.split("/").filter(Boolean);
+      let html = "";
+      if (!parts.length) html = home();
+      else if (parts[0]==="shop" && parts[1]) html = pageShop(parts[1]);
+      else if (parts[0]==="shop") html = pageShop();
+      else if (parts[0]==="product") html = pageProduct(parts[1]);
+      else if (parts[0]==="cart") html = pageCart();
+      else if (parts[0]==="checkout") html = pageCheckout();
+      else if (parts[0]==="order") html = pageOrder();
+      else if (parts[0]==="about") html = pageAbout();
+      else if (parts[0]==="contact") html = pageContact();
+      else if (parts[0]==="search") html = pageSearch(new URLSearchParams(qs).get("q"));
+      else if (parts[0]==="faq") html = pageFaq();
+      else if (parts[0]==="shipping") html = pageShipping();
+      else html = home();
+      document.getElementById("app").innerHTML = html;
+      document.querySelectorAll("nav.depts a").forEach(a => {
+        a.classList.toggle("on", a.getAttribute("data-nav") === "/" + parts.join("/"));
+      });
+      window.scrollTo(0,0);
+      bindPage(parts);
+    }
+
+    function bindPage(parts) {
+      document.querySelectorAll("[data-add]").forEach(btn => btn.onclick = () => add(btn.dataset.add, btn.dataset.size, 1));
+      document.querySelectorAll("[data-qty]").forEach(btn => btn.onclick = () => {
+        const [slug, sizeId, qty] = btn.dataset.qty.split("|");
+        setQty(slug, sizeId, Number(qty));
+        if (parts[0]==="cart") route();
+      });
+
+      if (parts[0]==="shop") {
+        let fam="all", flav="all", sort="featured";
+        const base = listFor(parts[1] || "all");
+        const apply = () => {
+          let list = base.filter(p => (fam==="all"||p.family===fam) && (flav==="all"||p.flavor===flav));
+          list = [...list].sort((a,b) => {
+            if (sort==="price-asc") return fromPrice(a)-fromPrice(b);
+            if (sort==="price-desc") return fromPrice(b)-fromPrice(a);
+            if (sort==="rating") return b.rating-a.rating;
+            if (sort==="name") return a.name.localeCompare(b.name);
+            return (b.featured||0)-(a.featured||0);
+          });
+          document.getElementById("grid").innerHTML = list.map(card).join("");
+          document.querySelectorAll("[data-add]").forEach(btn => btn.onclick = () => add(btn.dataset.add, btn.dataset.size, 1));
+        };
+        document.querySelectorAll("[data-fam]").forEach(b => b.onclick = () => { fam=b.dataset.fam; document.querySelectorAll("[data-fam]").forEach(x=>x.classList.toggle("on",x===b)); apply(); });
+        document.querySelectorAll("[data-flav]").forEach(b => b.onclick = () => { flav=b.dataset.flav; document.querySelectorAll("[data-flav]").forEach(x=>x.classList.toggle("on",x===b)); apply(); });
+        const sel = document.getElementById("sort");
+        if (sel) sel.onchange = () => { sort = sel.value; apply(); };
+      }
+
+      if (parts[0]==="product") {
+        const p = find(parts[1]); if (!p) return;
+        let sizeId = defSize(p).id, qty = 1;
+        const price = document.getElementById("pdpPrice");
+        document.querySelectorAll(".size").forEach(b => b.onclick = () => {
+          sizeId = b.dataset.size;
+          document.querySelectorAll(".size").forEach(x=>x.classList.toggle("on",x===b));
+          const s = p.sizes.find(x=>x.id===sizeId);
+          price.textContent = money(s.price);
+        });
+        document.getElementById("minus").onclick = () => { qty=Math.max(1,qty-1); document.getElementById("qty").textContent=qty; };
+        document.getElementById("plus").onclick = () => { qty+=1; document.getElementById("qty").textContent=qty; };
+        document.getElementById("addPdp").onclick = () => add(p.slug, sizeId, qty);
+        document.querySelectorAll("[data-tab]").forEach(b => b.onclick = () => {
+          document.querySelectorAll("[data-tab]").forEach(x=>x.classList.toggle("on",x===b));
+          const body = document.getElementById("tabBody");
+          body.textContent = b.dataset.tab==="d" ? p.desc : b.dataset.tab==="i" ? p.ing + " Packed in a kitchen that handles peanuts and tree nuts." : "Elena P., Columbus — Tastes like it was roasted that morning. James R., Nashville — Ordering the 5 lb for the holidays.";
+        });
+      }
+
+      const check = document.getElementById("checkForm");
+      if (check) check.onsubmit = e => {
+        e.preventDefault();
+        const fd = new FormData(check);
+        const ship = subtotal()>=FREE ? 0 : 8.95;
+        const order = {
+          id: "HNC-" + Math.floor(1000+Math.random()*9000),
+          name: fd.get("name"), email: fd.get("email"),
+          address: fd.get("address"), city: fd.get("city"), region: fd.get("region"), zip: fd.get("zip"),
+          lines: lines().map(l => ({ name:l.p.name, qty:l.qty, total:l.total })),
+          total: subtotal()+ship
+        };
+        localStorage.setItem("hnc-last-order", JSON.stringify(order));
+        cart.splice(0, cart.length); saveCart(); renderCart();
+        location.hash = "#/order";
+      };
+
+      const cf = document.getElementById("contactForm");
+      if (cf) cf.onsubmit = e => { e.preventDefault(); toast("Note received. We’ll write back."); cf.reset(); };
+    }
+
+    document.getElementById("cartBtn").onclick = openCart;
+    document.getElementById("closeCart").onclick = closeCart;
+    document.getElementById("drawerBg").onclick = closeCart;
+    document.getElementById("searchForm").onsubmit = e => { e.preventDefault(); location.hash = "#/search?q=" + encodeURIComponent(document.getElementById("q").value); };
+    document.getElementById("searchFormM").onsubmit = e => { e.preventDefault(); location.hash = "#/search?q=" + encodeURIComponent(document.getElementById("qM").value); };
+    document.getElementById("newsForm").onsubmit = e => { e.preventDefault(); toast("You’re on the harvest list."); e.target.reset(); };
+    document.getElementById("menuBtn").onclick = () => {
+      const n = document.getElementById("mobileNav");
+      n.style.display = n.style.display==="block" ? "none" : "block";
+    };
+    document.getElementById("mobileLinks").innerHTML = ["shop","shop/nuts","shop/popcorn","shop/mixes","shop/chocolate","shop/gifts","shop/harvest","about"].map(p=>{
+      const label = p==="shop"?"Shop all":p.split("/")[1]||"Our story";
+      return `<a href="#/${p}" style="display:flex;height:44px;align-items:center;text-decoration:none;font-weight:600">${label[0].toUpperCase()+label.slice(1)}</a>`;
+    }).join("");
+
+    window.addEventListener("hashchange", route);
+    renderCart();
+    route();
+  </script>
+</body>
+</html>
