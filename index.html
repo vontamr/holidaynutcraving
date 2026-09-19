@@ -53,13 +53,19 @@
     .topbar { display: flex; align-items: center; gap: 16px; padding: 12px 0; }
     .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
     .mark {
-      width: 72px; height: 72px; border-radius: 50%;
-      background: #f4ede3;
-      box-shadow: inset 0 0 0 2.5px var(--primary);
+      width: 88px; height: 112px;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
       display: grid; place-items: center; flex-shrink: 0;
-      overflow: hidden;
+      overflow: visible;
     }
-    .mark svg { display: block; width: 62px; height: 62px; }
+    .mark img {
+      width: 88px; height: 112px;
+      object-fit: contain;
+      object-position: center;
+      outline: none;
+    }
     .logo strong { display: block; font-family: var(--font-display); font-size: 15px; }
     .logo em { display: block; font-style: normal; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-top: 2px; font-weight: 600; }
     .search { flex: 1; position: relative; min-width: 0; }
@@ -88,17 +94,95 @@
     nav.depts .story { margin-left: auto; color: var(--muted); font-weight: 500; }
     .menu-btn { display: none; }
 
-    .hero { position: relative; min-height: 28rem; height: min(72vh, 680px); overflow: hidden; }
-    .hero-bg {
-      position: absolute; inset: 0;
-      background:
-        linear-gradient(to top, rgba(28,18,12,.85), rgba(28,18,12,.4) 45%, rgba(28,18,12,.18)),
-        radial-gradient(circle at 30% 40%, #6b3a22 0%, #3d2414 55%, #1c120c 100%);
+    .hero { padding: 16px 0 0; }
+    .hero-mosaic {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "feature"
+        "fresh"
+        "hits";
     }
-    .hero-inner { position: absolute; inset-inline: 0; bottom: 0; padding: 64px 0 40px; }
+    @media (min-width: 900px) {
+      .hero-mosaic {
+        grid-template-columns: 1.42fr .86fr;
+        grid-template-rows: minmax(280px, 1.08fr) minmax(240px, .92fr);
+        grid-template-areas:
+          "feature fresh"
+          "feature hits";
+        gap: 14px;
+        min-height: min(66vh, 620px);
+      }
+    }
+    .hero-card {
+      position: relative;
+      display: block;
+      overflow: hidden;
+      min-height: 220px;
+      text-decoration: none;
+      color: var(--primary-fg);
+      isolation: isolate;
+    }
+    .hero-card.feature { grid-area: feature; min-height: 320px; border-radius: 6px 32px 6px 32px; }
+    .hero-card.fresh { grid-area: fresh; border-radius: 32px 6px 20px 6px; }
+    .hero-card.hits { grid-area: hits; border-radius: 6px 20px 32px 6px; }
+    .hero-card .photo {
+      position: absolute; inset: 0;
+      transform: scale(1.03);
+      transition: transform .85s cubic-bezier(.22,1,.36,1);
+    }
+    .hero-card:hover .photo { transform: scale(1.08); }
+    .hero-card .scrim {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(28,18,12,.12) 10%, rgba(28,18,12,.72) 100%);
+    }
+    .hero-card.feature .scrim {
+      background:
+        linear-gradient(105deg, rgba(28,18,12,.78) 0%, rgba(28,18,12,.28) 48%, rgba(28,18,12,.1) 100%),
+        linear-gradient(180deg, transparent 42%, rgba(28,18,12,.55) 100%);
+    }
+    .hero-card .copy {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      padding: 22px 22px 24px;
+      z-index: 1;
+    }
+    .hero-card.feature .copy { padding: 32px 32px 34px; max-width: 34rem; }
+    .hero-card h1, .hero-card h2 { margin: 6px 0 0; color: var(--primary-fg); font-weight: 600; letter-spacing: -.03em; }
+    .hero-card h1 { font-size: clamp(2.1rem, 4.2vw, 3.5rem); max-width: 11ch; }
+    .hero-card h2 { font-size: clamp(1.35rem, 2.1vw, 1.8rem); }
+    .hero-card p { margin: 10px 0 0; max-width: 36ch; color: color-mix(in oklab, var(--primary-fg) 86%, transparent); }
+    .hero-card.fresh p, .hero-card.hits p { max-width: 22ch; font-size: 15px; }
+    .hero-card::after {
+      content: "";
+      position: absolute; inset: 0;
+      border-radius: inherit;
+      box-shadow: inset 0 0 0 1px rgba(251,247,241,.16);
+      pointer-events: none;
+      z-index: 2;
+    }
+    .hero-chip {
+      position: absolute; top: 14px; left: 14px; z-index: 2;
+      height: 28px; padding: 0 10px; border-radius: 99px;
+      display: inline-flex; align-items: center;
+      background: color-mix(in oklab, var(--bg) 82%, transparent);
+      color: var(--ink); backdrop-filter: blur(10px);
+      font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+    }
+    .btn.pill {
+      border-radius: 99px;
+      background: color-mix(in oklab, var(--primary-fg) 94%, white);
+      color: var(--ink);
+      height: 44px; padding: 0 22px;
+      box-shadow: 0 8px 24px rgba(28,18,12,.18);
+    }
+    .btn.pill:hover { filter: none; background: #fff; }
+    .hero-link {
+      display: inline-block; margin-top: 14px;
+      font-size: 14px; font-weight: 700;
+      border-bottom: 1px solid rgba(251,247,241,.55); padding-bottom: 2px;
+    }
     .kicker { font-size: 11px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: color-mix(in oklab, var(--primary-fg) 80%, transparent); }
-    .hero h1 { margin: 8px 0 0; max-width: 22ch; font-size: clamp(1.8rem, 4vw, 3.6rem); color: var(--primary-fg); }
-    .hero p { margin: 12px 0 0; max-width: 42ch; color: color-mix(in oklab, var(--primary-fg) 85%, transparent); }
     .row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
 
     .btn {
@@ -299,23 +383,8 @@
     <div class="wrap topbar">
       <button class="icon-btn menu-btn" id="menuBtn" aria-label="Menu">☰</button>
       <a class="logo" href="#/" data-nav="/">
-        <span class="mark" aria-hidden="true">
-          <svg viewBox="2 0 34 36" fill="none">
-            <rect x="10.5" y="0.6" width="14.5" height="8.4" rx="1.2" fill="#700C0E"/>
-            <rect x="10.5" y="6.6" width="14.5" height="2.4" fill="#3D5A45"/>
-            <rect x="7.2" y="8.4" width="21.2" height="2.1" rx="0.7" fill="#700C0E"/>
-            <path d="M10.6 10.6h13.4v8.6H15.2L10.6 23V10.6Z" fill="#FBF7F1"/>
-            <path d="M10.6 10.6h4.2v12.4L10.6 23V10.6Z" fill="#700C0E"/>
-            <circle cx="20.6" cy="14.2" r="1.05" fill="#700C0E"/>
-            <path d="M15 19.2h13.4v3.8h-9.2L15 26.2v-7Z" fill="#FBF7F1"/>
-            <path d="M17.2 19.5h1.35v2.9H17.2zm2.15 0h1.35v2.9h-1.35zm2.15 0h1.35v2.9h-1.35z" fill="#700C0E"/>
-            <ellipse cx="29.2" cy="21.6" rx="5.4" ry="4.7" fill="#6B3A22"/>
-            <path d="M26.6 19.4c1.6 1.4 3.5 1.8 5.1.4" stroke="#F4EDE3" stroke-width="1" stroke-linecap="round"/>
-            <path d="M24.6 21.2c1.4 1.2 2.8 1.2 4.2 0" stroke="#4A2818" stroke-width=".7" stroke-linecap="round"/>
-            <path d="M10.8 23.4h12.4l1.8 8.4H12.4L10.8 23.4Z" fill="#700C0E"/>
-            <path d="M12.2 25.2 22.6 26.7 21.3 31.6H14.4L12.2 25.2Z" fill="#FBF7F1"/>
-            <path d="M12.2 31.6h13.2l.6 2.8H11.6l.6-2.8Z" fill="#3D5A45"/>
-          </svg>
+        <span class="mark">
+          <img src="assets/holidaynutcravinglogo.jpg" alt="Holiday Nut Craving" />
         </span>
         <span>
           <strong>Holiday Nut Craving</strong>
@@ -358,23 +427,8 @@
     <div class="wrap">
       <div>
         <a class="logo" href="#/" data-nav="/">
-          <span class="mark" aria-hidden="true">
-            <svg viewBox="2 0 34 36" fill="none">
-              <rect x="10.5" y="0.6" width="14.5" height="8.4" rx="1.2" fill="#700C0E"/>
-              <rect x="10.5" y="6.6" width="14.5" height="2.4" fill="#3D5A45"/>
-              <rect x="7.2" y="8.4" width="21.2" height="2.1" rx="0.7" fill="#700C0E"/>
-              <path d="M10.6 10.6h13.4v8.6H15.2L10.6 23V10.6Z" fill="#FBF7F1"/>
-              <path d="M10.6 10.6h4.2v12.4L10.6 23V10.6Z" fill="#700C0E"/>
-              <circle cx="20.6" cy="14.2" r="1.05" fill="#700C0E"/>
-              <path d="M15 19.2h13.4v3.8h-9.2L15 26.2v-7Z" fill="#FBF7F1"/>
-              <path d="M17.2 19.5h1.35v2.9H17.2zm2.15 0h1.35v2.9h-1.35zm2.15 0h1.35v2.9h-1.35z" fill="#700C0E"/>
-              <ellipse cx="29.2" cy="21.6" rx="5.4" ry="4.7" fill="#6B3A22"/>
-              <path d="M26.6 19.4c1.6 1.4 3.5 1.8 5.1.4" stroke="#F4EDE3" stroke-width="1" stroke-linecap="round"/>
-              <path d="M24.6 21.2c1.4 1.2 2.8 1.2 4.2 0" stroke="#4A2818" stroke-width=".7" stroke-linecap="round"/>
-              <path d="M10.8 23.4h12.4l1.8 8.4H12.4L10.8 23.4Z" fill="#700C0E"/>
-              <path d="M12.2 25.2 22.6 26.7 21.3 31.6H14.4L12.2 25.2Z" fill="#FBF7F1"/>
-              <path d="M12.2 31.6h13.2l.6 2.8H11.6l.6-2.8Z" fill="#3D5A45"/>
-            </svg>
+          <span class="mark">
+            <img src="assets/holidaynutcravinglogo.jpg" alt="Holiday Nut Craving" />
           </span>
           <span><strong>Holiday Nut Craving</strong><em>Est. 2023 · Fall relaunch</em></span>
         </a>
@@ -608,17 +662,45 @@
       const popcorn = products.filter(p=>p.dept==="popcorn").slice(0,4);
       const gifts = products.filter(p=>p.dept==="gifts");
       return `
-      <section class="hero"><div class="hero-bg"></div>
-        <div class="hero-inner"><div class="wrap">
-          <p class="kicker">Fall 2026 relaunch</p>
-          <h1>The nuts you crave. The popcorn the town already buys.</h1>
-          <p>Holiday Nut Craving is back — roasted to order, packed the day it ships, with a new local kettle line for harvest season.</p>
-          <div class="row">
-            <a class="btn" href="#/shop">Shop the harvest</a>
-            <a class="btn ghost" href="#/shop/popcorn">Shop popcorn</a>
-          </div>
-        </div></div>
-      </section>
+      <section class="hero"><div class="wrap">
+        <div class="hero-mosaic">
+          <a class="hero-card feature" href="#/shop/harvest">
+            <div class="photo" style="background:
+              linear-gradient(120deg, rgba(28,18,12,.15), transparent 40%),
+              radial-gradient(circle at 28% 42%, #c48a3a 0%, #6b3a22 38%, #3d2414 68%, #1c120c 100%);"></div>
+            <div class="scrim"></div>
+            <span class="hero-chip">Fall roast · 2026</span>
+            <div class="copy">
+              <p class="kicker">This harvest</p>
+              <h1>Cozy up to fall flavors.</h1>
+              <p>Maple pecans, kettle caramel, and the mixed tin we built the shop around.</p>
+              <div class="row"><span class="btn pill">Shop now</span></div>
+            </div>
+          </a>
+          <a class="hero-card fresh" href="#/shop/popcorn">
+            <div class="photo" style="background:
+              radial-gradient(circle at 70% 30%, #f0c56a 0%, #c47a2c 42%, #5a2e12 100%);"></div>
+            <div class="scrim"></div>
+            <div class="copy">
+              <p class="kicker">Just off the kettle</p>
+              <h2>Taste what’s fresh.</h2>
+              <p>New treats and seasonal sweets, packed the same day.</p>
+              <span class="hero-link">Shop now</span>
+            </div>
+          </a>
+          <a class="hero-card hits" href="#/shop">
+            <div class="photo" style="background:
+              radial-gradient(circle at 40% 35%, #d2b48c 0%, #8a5a32 45%, #3d2414 100%);"></div>
+            <div class="scrim"></div>
+            <div class="copy">
+              <p class="kicker">House roster</p>
+              <h2>Greatest hits.</h2>
+              <p>The bags people never order just once.</p>
+              <span class="hero-link">Shop now</span>
+            </div>
+          </a>
+        </div>
+      </div></section>
       <section class="promises"><div class="wrap">
         <div class="promise"><div>📦</div><div><b>Packed to order</b><span>Roasted and bagged the day it leaves the kitchen.</span></div></div>
         <div class="promise"><div>🚚</div><div><b>Free shipping $49+</b><span>Continental U.S. Ground on qualifying orders.</span></div></div>
